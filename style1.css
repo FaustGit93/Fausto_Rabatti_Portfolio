@@ -102,7 +102,7 @@ nav ul li
 content: '';
 width: 0;
 height: 2px;
-background: #ff0000;
+background: #ffffff;
 position: absolute;
 left: 0;
 bottom: -12px;
@@ -223,7 +223,7 @@ margin: 20px 0 35px;
 		content: '';
 		width: 0;
 		height: 2px;
-		background: #ff0000; 
+		background: #ffffff; 
 		position: absolute;
 		left: 0;
 		bottom: -12px;
@@ -303,7 +303,7 @@ margin: 20px 0 35px;
 		}
 		.services-list div:hover {
 
-		background: #ff0000;
+		background: #464646;
 			transform: translateY(-15px);
 		}
 		.services-list div img 
