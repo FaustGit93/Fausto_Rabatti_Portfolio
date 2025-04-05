@@ -215,6 +215,7 @@ margin: 20px 0 35px;
 	cursor: pointer;
 	position: relative;
 }
+
 	.tab-links::after
 	{
 		content: '';
