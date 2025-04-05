@@ -436,7 +436,7 @@ transition: background 0.3s;
 		background: none;
 		border: none;
 		transition: transform 0.5s;
-		margin-top: 2px;
+		margin-top: -20px;
 		margin-left: -35px;
 	}
 
