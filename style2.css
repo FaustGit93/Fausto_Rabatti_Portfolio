@@ -60,9 +60,21 @@ body {
 	background-size: cover;
 	background-position: center;
 }
+#header4 {
+
+}
 .container {
 	padding: 10px 10%;
+	
 
+}
+.container1 {
+	
+	
+	padding: 10px 10%;
+	padding: 10% 10px;
+	
+	
 }
 
 nav {
