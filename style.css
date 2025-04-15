@@ -445,6 +445,26 @@ transition: background 0.3s;
 
 }
 
+.btnphone 
+{
+	color: #ffffff;
+border: none;
+//border: 1px solid #b6ff00;
+border-radius: 6px;
+text-decoration:none;
+color: #ffffff;
+transition: background 0.3s;
+
+
+}
+.btnphone:hover
+{
+	
+	background: none;
+	text-decoration:underline;
+}
+
+
 /*/-------- Contact ----------*/
 .subtitle.subtitle3 
 {
