@@ -448,6 +448,26 @@ transition: background 0.3s;
 
 }
 
+.btnphone 
+{
+	color: #ffffff;
+border: none;
+//border: 1px solid #b6ff00;
+border-radius: 6px;
+text-decoration:none;
+color: #ffffff;
+transition: background 0.3s;
+
+
+}
+.btnphone:hover
+{
+	
+	background: none;
+	text-decoration:underline;
+}
+
+
 /*/-------- Contact ----------*/
 .subtitle.subtitle3 
 {
@@ -513,7 +533,7 @@ form input, form textarea
 }
 	.social-icons a:hover
 	{
-		color: #ffffff;
+		color: #ff0000;
 		transform: translateY(-5px);
 
 		
@@ -523,14 +543,14 @@ form input, form textarea
 	width: 100%;
 	text-align: center;
 	padding: 25px 0;
-	background: #1e1e1e;
+	background: #000000;
 	font-weight:300;
 	margin-top: 20px;
 }
 .copyright i 
 {
 	padding-right:5px;
-	color: #b6ff00;
+	color: #ffffff;
 
 
 }
