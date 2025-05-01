@@ -407,43 +407,38 @@ camera.upperBetaLimit = 1.5;
     const canvas = document.getElementById("renderCanvas");
     let scrollBlocked = false;
   
+    // Rileva se siamo su desktop (larghezza > 768px)
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+  
     function blockScroll(e) {
-      if (scrollBlocked) {
+      if (scrollBlocked && isDesktop) {
         e.preventDefault();
       }
     }
   
     function blockKeyScroll(e) {
-      if (!scrollBlocked) return;
+      if (!scrollBlocked || !isDesktop) return;
   
-      // Tasti comuni per scrollare la pagina
-      const keysToBlock = [
-        'ArrowUp', 'ArrowDown',
-        'PageUp', 'PageDown',
-        ' ', 'Home', 'End'
-      ];
-  
+      const keysToBlock = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', ' ', 'Home', 'End'];
       if (keysToBlock.includes(e.key)) {
         e.preventDefault();
       }
     }
   
-    // Attiva il blocco dopo interazione
-    canvas.addEventListener("mousedown", () => scrollBlocked = true);
-    canvas.addEventListener("touchstart", () => scrollBlocked = true);
+    if (isDesktop) {
+      // Solo su desktop attiviamo questi eventi
+      canvas.addEventListener("mousedown", () => scrollBlocked = true);
+      canvas.addEventListener("touchstart", () => scrollBlocked = true); // può rimanere
   
-    // Disattiva il blocco quando l'interazione finisce
-    canvas.addEventListener("mouseup", () => scrollBlocked = false);
-    canvas.addEventListener("mouseleave", () => scrollBlocked = false);
-    canvas.addEventListener("touchend", () => scrollBlocked = false);
-    canvas.addEventListener("touchcancel", () => scrollBlocked = false);
+      canvas.addEventListener("mouseup", () => scrollBlocked = false);
+      canvas.addEventListener("mouseleave", () => scrollBlocked = false);
+      canvas.addEventListener("touchend", () => scrollBlocked = false);
+      canvas.addEventListener("touchcancel", () => scrollBlocked = false);
   
-    // Blocca lo scroll da mouse e touch
-    canvas.addEventListener("wheel", blockScroll, { passive: false });
-    canvas.addEventListener("touchmove", blockScroll, { passive: false });
-  
-    // Blocca lo scroll da tastiera
-    window.addEventListener("keydown", blockKeyScroll, { passive: false });
+      canvas.addEventListener("wheel", blockScroll, { passive: false });
+      canvas.addEventListener("touchmove", blockScroll, { passive: false });
+      window.addEventListener("keydown", blockKeyScroll, { passive: false });
+    }
   </script>
 
 
