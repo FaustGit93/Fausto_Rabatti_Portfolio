@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="style1.css">
     <script src="https://kit.fontawesome.com/42a675b1a0.js" crossorigin="anonymous"></script>
 
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+
+
     <!-----https://script.google.com/macros/s/AKfycbwk-vbpH_SJFjrexmiQl9piEc8U6StW-7xg4EYMIU-iuVLz2i0ReLtPKDWMqQ10nGd_sg/exec------->
 </head>
 
@@ -18,7 +22,7 @@
 
 
     <div id="header1">
-        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnIzN25weWljNDM5MDM4Nmt1eWludDJwaWQ2NDNiOHRqenVtd3hnZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oEduEwPB9JKgxOsJG/giphy.gif" loop="infinite" alt="background animation" class="background-image" />
+   <!-----     <canvas id="renderCanvas" style="width: 100%; height: 100%px;"></canvas>    ---->
 
         <div class="container">
 
@@ -39,10 +43,34 @@
             <div class="header2-text">
                 <p class="z10"></p>
                 <h1 class="z10">Rendering <span>3D</span><br></h1>
+               
+
             </div>
         </div>
+      <!---  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnIzN25weWljNDM5MDM4Nmt1eWludDJwaWQ2NDNiOHRqenVtd3hnZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oEduEwPB9JKgxOsJG/giphy.gif" loop="infinite" alt="background animation" class="background-image" /> ---->
+      <canvas id="renderCanvas" style="width: 100%; height: 100%px;"></canvas>   
+
     </div>
     <!-----  Header End ------------>
+
+
+       <!----- Headers Start2 --------->
+
+
+
+       <div id="header1">
+      <!---  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnIzN25weWljNDM5MDM4Nmt1eWludDJwaWQ2NDNiOHRqenVtd3hnZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oEduEwPB9JKgxOsJG/giphy.gif"
+      
+      loop="infinite" alt="background animation" class="background-image" />   --->
+    <!-------    <canvas id="renderCanvas" style="width: 100%; height: 400px;"></canvas>   -->
+
+      </div>
+    <!-----  Header End2 ------------>
+
+
+
+
+
 
 
 
@@ -298,6 +326,106 @@
         }
 
     </script>
+
+
+<!-- Babylon Init -->
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var canvas = document.getElementById('renderCanvas');
+      var engine = new BABYLON.Engine(canvas, true);
+  
+      var createScene = function () {
+        var scene = new BABYLON.Scene(engine);
+        
+       
+        var camera = new BABYLON.ArcRotateCamera(
+  "Camera",
+  Math.PI / 2,
+  Math.PI / 2.5,
+  10,
+  BABYLON.Vector3.Zero(),
+  scene
+);
+camera.attachControl(canvas, true);
+
+// Limiti zoom
+camera.lowerRadiusLimit = 50;
+camera.upperRadiusLimit = 200;
+
+// (Opzionale) Limiti rotazione verticale
+camera.lowerBetaLimit = 0.5;
+camera.upperBetaLimit = 1.5;
+
+
+        scene.clearColor = new BABYLON.Color4(0, 0, 0, 1); // nero opaco
+
+  
+        var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
+  
+        // Carica il tuo modello 3D qui:
+        BABYLON.SceneLoader.Append("models/", "statue.glb", scene, function (scene) {
+            console.log("Modello caricato!");
+        });
+  
+        return scene;
+      };
+  
+      var scene = createScene();
+  
+      engine.runRenderLoop(function () {
+        scene.render();
+      });
+  
+      window.addEventListener('resize', function () {
+        engine.resize();
+      });
+    });
+  </script>
+
+
+
+<script>
+    const canvas = document.getElementById("renderCanvas");
+    let scrollBlocked = false;
+  
+    function blockScroll(e) {
+      if (scrollBlocked) {
+        e.preventDefault();
+      }
+    }
+  
+    function blockKeyScroll(e) {
+      if (!scrollBlocked) return;
+  
+      // Tasti comuni per scrollare la pagina
+      const keysToBlock = [
+        'ArrowUp', 'ArrowDown',
+        'PageUp', 'PageDown',
+        ' ', 'Home', 'End'
+      ];
+  
+      if (keysToBlock.includes(e.key)) {
+        e.preventDefault();
+      }
+    }
+  
+    // Attiva il blocco dopo interazione
+    canvas.addEventListener("mousedown", () => scrollBlocked = true);
+    canvas.addEventListener("touchstart", () => scrollBlocked = true);
+  
+    // Disattiva il blocco quando l'interazione finisce
+    canvas.addEventListener("mouseup", () => scrollBlocked = false);
+    canvas.addEventListener("mouseleave", () => scrollBlocked = false);
+    canvas.addEventListener("touchend", () => scrollBlocked = false);
+    canvas.addEventListener("touchcancel", () => scrollBlocked = false);
+  
+    // Blocca lo scroll da mouse e touch
+    canvas.addEventListener("wheel", blockScroll, { passive: false });
+    canvas.addEventListener("touchmove", blockScroll, { passive: false });
+  
+    // Blocca lo scroll da tastiera
+    window.addEventListener("keydown", blockKeyScroll, { passive: false });
+  </script>
 
 
 </body>
